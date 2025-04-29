@@ -1,6 +1,9 @@
 package dev.databoss
 
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.extensions.spring.SpringTestExtension
+import io.kotest.extensions.spring.SpringTestLifecycleMode
+import io.kotest.extensions.spring.testContextManager
 import io.kotest.inspectors.forOne
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
@@ -14,7 +17,13 @@ class AutoconfiguredPropagatorTest(
    val applicationContext: ApplicationContext,
 ) : FunSpec(
    {
-      test("Application context should have management.tracing.enabled = true"){
+      extensions(SpringTestExtension(SpringTestLifecycleMode.Root))
+
+      test("testContextManager") {
+         testContextManager().testContext.applicationContext.environment.getProperty("management.tracing.enabled") shouldBe "true"
+      }
+
+      test("Application context should have management.tracing.enabled = true") {
          applicationContext.environment.getProperty("management.tracing.enabled") shouldBe "true"
       }
 
