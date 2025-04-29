@@ -1,0 +1,11 @@
+management:
+   tracing:
+      enabled: true
+      propagation:
+         type: b3_multi
+
+spring:
+   datasource:
+      url: jdbc:postgresql://localhost:5433/sampledb
+      username: foo
+      password: bar

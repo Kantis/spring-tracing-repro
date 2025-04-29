@@ -19,7 +19,7 @@ detekt {
 }
 
 configure<KtlintExtension> {
-   version.set("1.3.0")
+   version.set("1.5.0")
    filter {
       exclude {
          it.file.path.contains("generated")
@@ -51,9 +51,4 @@ tasks.withType<Detekt>().configureEach {
 
 tasks.withType<Test>().configureEach {
    useJUnitPlatform()
-   systemProperty("log4j2.configurationFile", "log4j2-local.properties")
-   systemProperty("kotest.framework.discovery.jar.scan.disabled", "true")
-   systemProperty("kotest.framework.disable.test.nested.jar.scanning", "true")
-   systemProperty("kotest.framework.classpath.scanning.config.disable", "true")
-   systemProperty("kotest.framework.classpath.scanning.autoscan.disable", "true")
 }
